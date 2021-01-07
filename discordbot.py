@@ -17,4 +17,13 @@ async def on_command_error(ctx, error):
 async def hello(ctx):
     await ctx.send('こんばんは(　＾∀＾)')
     
+    
+@bot.command()
+async def help(ctx):
+embed=discord.Embed(title="へるぷ▪めにゅー", description="s/hello", color=0x260ccf)
+embed.add_field(name="BOT運営", value="SUN#0796", inline=True)
+embed.set_footer(text="Smart Human ")
+await ctx.send(embed=embed)
+
+
 bot.run(token)
