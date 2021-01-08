@@ -19,12 +19,11 @@ async def hello(ctx):
     
 @bot.command()
 async def menu(ctx):
-    await ctx.send('s/menu **ヘルプメニューを表示します。\ns/hello **挨拶をします**'
+    await ctx.send('s/menu **ヘルプメニューを表示します。\ns/hello **挨拶をします`)
                   
-@client.event   
-async def on_ready():
-    await client.change_presence(status=discord.Status.online,activity=discord.Game('試験中'))
-    print('接続\n-----')
-    await greet()
+@bot.command()
+async def lol(ctx):
+    await ctx.send(`( ・∀・)`)
+                
                    
 bot.run(token)
