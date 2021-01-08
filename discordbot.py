@@ -19,6 +19,6 @@ async def hello(ctx):
     
 @bot.command()
 async def menu(ctx):
-    await ctx.send('s/menu **ヘルプメニューを表示します。s/hello **挨拶をします**')
+    await ctx.send('s/menu **ヘルプメニューを表示します。\ns/hello **挨拶をします**')
     
 bot.run(token)
