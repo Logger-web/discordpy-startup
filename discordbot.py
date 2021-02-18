@@ -8,7 +8,6 @@ token = os.environ['DISCORD_BOT_TOKEN']
 @bot.command(pass_context=True)
 async def ping(ctx):
     """ Pong! """
-    await delete_message(ctx.message)
     before = time.monotonic()
     message = await ctx.send("Pong!")
     ping = (time.monotonic() - before) * 1000
