@@ -5,14 +5,38 @@ import traceback
 bot = commands.Bot(command_prefix='hi!')
 token = os.environ['DISCORD_BOT_TOKEN']
 
-@bot.command(pass_context=True)
-async def ping(ctx):
-    """ Pong! """
-    before = time.monotonic()
-    message = await ctx.send("Pong!")
-    ping = (time.monotonic() - before) * 1000
-    await message.edit(content=f"Pong!  `{int(ping)}ms`")
-    print(f'Ping {int(ping)}ms')
+@client.command()
+async def tempmute(ctx, member: discord.Member, time: int, d, *, reason=None):
+    guild = ctx.guild
+
+    for role in guild.roles:
+        if role.name == "Muted":
+            await member.add_roles(role)
+
+            embed = discord.Embed(title="muted!", description=f"{member.mention} has been tempmuted ", colour=discord.Colour.light_gray())
+            embed.add_field(name="reason:", value=reason, inline=False)
+            embed.add_field(name="time left for the mute:", value=f"{time}{d}", inline=False)
+            await ctx.send(embed=embed)
+
+            if d == "s":
+                await asyncio.sleep(time)
+
+            if d == "m":
+                await asyncio.sleep(time*60)
+
+            if d == "h":
+                await asyncio.sleep(time*60*60)
+
+            if d == "d":
+                await asyncio.sleep(time*60*60*24)
+
+            await member.remove_roles(role)
+
+            embed = discord.Embed(title="unmute (temp) ", description=f"unmuted -{member.mention} ", colour=discord.Colour.light_gray())
+            await ctx.send(embed=embed)
+
+            return
+
 
 
 @bot.event
