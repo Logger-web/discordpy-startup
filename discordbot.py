@@ -1,6 +1,6 @@
 from discord.ext import commands
 import os
-import asynio
+import asyncio
 
 client = commands.Bot(command_prefix='hi!')
 @client.event
