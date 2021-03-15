@@ -32,7 +32,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
         try:
             reaction, user = await client.wait_for('reaction_add', timeout=settime, check=check)
         except asyncio.TimeoutError:
-            await ctx.send('残念、人が足りなかったようだ...')
+            await ctx.send('残念、人が集まらなかったようだ...')
             break
         else:
             print(str(reaction.emoji))
@@ -48,7 +48,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     test.add_field(name=f"あと__{cnt}__人 募集中\n", value='\n'.join(reaction_member), inline=True)
                     await msg.edit(embed=test)
                     finish = discord.Embed(title=about,colour=0x1e90ff)
-                    finish.add_field(name="おっと、メンバーがきまったようだ",value='\n'.join(reaction_member), inline=True)
+                    finish.add_field(name="おっと、メンバーが決まったようだな",value='\n'.join(reaction_member), inline=True)
                     await ctx.send(embed=finish)
 
             elif str(reaction.emoji) == '✖':
@@ -63,22 +63,22 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
         await msg.remove_reaction(str(reaction.emoji), user)
         
-@bot.event
+@client.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
 
-@bot.command()
+@client.command()
 async def hello(ctx):
     await ctx.send('こんばんは(　＾∀＾)')
     
-@bot.command()
+@client.command()
 async def me(ctx):
     await ctx.send('君、誰だよ！')
                   
-@bot.command()
+@client.command()
 async def lol(ctx):
     await ctx.send('( ・∀・)')
                 
