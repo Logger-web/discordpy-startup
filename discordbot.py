@@ -83,4 +83,4 @@ async def lol(ctx):
     await ctx.send('( ・∀・)')
                 
                    
-bot.run(DISCORD_BOT_TOKEN)
+client.run(DISCORD_BOT_TOKEN)
