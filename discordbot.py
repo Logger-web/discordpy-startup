@@ -2,6 +2,8 @@ from discord.ext import commands
 import os
 import asyncio
 
+TOKEN='ODA3NDM0MTAxMzMwMDE4MzE1.YB37mw.EvT3wiRkQpgsW1CXn5CCHQsY-Vg'
+
 client = commands.Bot(command_prefix='hi!')
 @client.event
 async def on_ready():
@@ -83,4 +85,4 @@ async def lol(ctx):
     await ctx.send('( ・∀・)')
                 
                    
-client.run(DISCORD_BOT_TOKEN)
+client.run(TOKEN)
