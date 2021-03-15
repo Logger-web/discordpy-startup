@@ -63,7 +63,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
         await msg.remove_reaction(str(reaction.emoji), user)
 
-@bot.command()
+@client.command()
 @commands.has_permissions(manage_messages=True)
 async def mute(ctx, member: discord.Member, *, reason=None):
     guild = ctx.guild
@@ -77,16 +77,16 @@ async def mute(ctx, member: discord.Member, *, reason=None):
 
     await member.add_roles(mutedRole, reason=reason)
     await ctx.send(f"Muted {member.mention} for reason {reason}")
-    await member.send(f"You were muted in the server {guild.name} for {reason}")
+    await member.send(f"{guild.name}であなたはミュートされました。\n理由:{reason}")
 
-@bot.command()
+@client.command()
 @commands.has_permissions(manage_messages=True)
 async def unmute(ctx, member: discord.Member):
     mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
 
     await member.remove_roles(mutedRole)
     await ctx.send(f"Unmuted {member.mention}")
-    await member.send(f"You were unmuted in the server {ctx.guild.name}")
+    await member.send(f"{ctx.guild.name}でのミュートが解除されました。")
     
     
 @bot.event
