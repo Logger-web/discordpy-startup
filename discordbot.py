@@ -68,7 +68,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                 else:
                     pass
                 
-            elif str(reaction.emoji) == '🔚'
+            elif str(reaction.emoji) == '🔚':
             　　　　　test = discord.Embed(title=about,color=0x1e90ff)
                     test.add_field(name=f"募集終了")
                     await msg.edit(embed=test)
