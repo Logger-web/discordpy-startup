@@ -22,15 +22,15 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
     test.add_field(name=f"あと{cnt}人 募集中\n", value=None, inline=True)
     msg = await ctx.send(embed=test)
     #投票の欄
-    await msg.add_reaction('⏫')
-    await msg.add_reaction('✖')
+    await msg.add_reaction('⬆️')
+    await msg.add_reaction('↩️')
 
     def check(reaction, user):
         emoji = str(reaction.emoji)
         if user.bot == True:    # botは無視
             pass
         else:
-            return emoji == '⏫' or emoji == '✖'
+            return emoji == '⬆️' or emoji == '↩️'
 
     while len(reaction_member)-1 <= cnt:
         try:
@@ -40,7 +40,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
             break
         else:
             print(str(reaction.emoji))
-            if str(reaction.emoji) == '⏫':
+            if str(reaction.emoji) == '⬆️':
                 reaction_member.append(user.name)
                 cnt -= 1
                 test = discord.Embed(title=about,colour=0x1e90ff)
@@ -55,7 +55,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     finish.add_field(name="おっと、メンバーが決まったようだな",value='\n'.join(reaction_member), inline=True)
                     await ctx.send(embed=finish)
 
-            elif str(reaction.emoji) == '✖':
+            elif str(reaction.emoji) == '↩️':
                 if user.name in reaction_member:
                     reaction_member.remove(user.name)
                     cnt += 1
@@ -77,6 +77,10 @@ async def on_command_error(ctx, error):
 @client.command()
 async def hello(ctx):
     await ctx.send('こんばんは(　＾∀＾)')
+   
+@client.command()
+async def baka(ctx):
+    await ctx.send('自己紹介ありがとうございます(^.^)(-.-)(__)')
     
 @client.command()
 async def me(ctx):
