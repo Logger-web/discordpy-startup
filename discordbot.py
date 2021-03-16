@@ -3,6 +3,8 @@ import os
 import asyncio
 
 client = commands.Bot(command_prefix='hi!')
+token = os.environ['DISCORD_BOT_TOKEN']
+
 @client.event
 async def on_ready():
     print('Logged in as')
