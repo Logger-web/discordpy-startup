@@ -9,8 +9,11 @@ token = os.environ['DISCORD_BOT_TOKEN']
 
 @client.event
 async def on_ready():
+    print('------')
     print('起動しました。')
+    print('名前')
     print(client.user.name)
+    print('ID')
     print(client.user.id)
     print('------')
     
@@ -64,6 +67,12 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     await msg.edit(embed=test)
                 else:
                     pass
+                
+                elif target_reaction.reaction.emoji == '🔚':
+                        await client.edit_message(msg, '募集終了\n'+ '\n'.join(frelist))
+                        await client.unpin_message(msg)
+                        break
+                        
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
         await msg.remove_reaction(str(reaction.emoji), user)
         
