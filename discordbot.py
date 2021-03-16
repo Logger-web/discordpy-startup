@@ -68,11 +68,11 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                 else:
                     pass
                 
-                elif target_reaction.reaction.emoji == '🔚':
-                        await client.edit_message(msg, '募集終了\n'+ '\n'.join(frelist))
-                        await client.unpin_message(msg)
-                        break
-                        
+            elif str(reaction.emoji) == '🔚'
+            　　　　　test = discord.Embed(title=about,color=0x1e90ff)
+                    test.add_field(name=f"募集終了")
+                    await msg.edit(embed=test)
+                    
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
         await msg.remove_reaction(str(reaction.emoji), user)
         
