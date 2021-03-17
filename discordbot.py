@@ -74,8 +74,6 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     test = discord.Embed(title=about,color=0x1e90ff)
                     test.add_field(name=f"募集終了")
                     await msg.edit(embed=test)
-                else:
-                    pass
                     
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
         await msg.remove_reaction(str(reaction.emoji), user)
@@ -88,7 +86,8 @@ async def on_command_error(ctx, error):
 
 @client.command()
 async def menu(ctx):
-    await ctx.send('prefix:=\nhello **挨拶(?)します。**\nme **???(実行してみよう)**\nlol **???(実行してみよう)**\nrect <項目>　<人数> <時間(秒)> **募集を呼び掛けます(※開発中)**')    
+    await ctx.send('prefix:=\nmenu **これです。**\nhello **挨拶(?)します。**\nme **???(実行してみよう)**\nlol **???(実行してみよう)**\nrect <項目>　<人数> <時間(秒)> **募集を呼び掛けます(※開発中)**') 
+    
 @client.command()
 async def hello(ctx):
     await ctx.send('こんばんは(　＾∀＾)')
