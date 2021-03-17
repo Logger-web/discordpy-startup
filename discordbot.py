@@ -140,7 +140,7 @@ async def me(ctx):
                   
 @client.command()
 async def lol(ctx):
-    await ctx.send('( ・∀・)')
+    await ctx.send('**( ・∀・)**')
                 
                    
 client.run(token)
