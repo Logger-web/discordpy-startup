@@ -36,7 +36,7 @@ class DiscordBot(discord.Client):
 		logging.info(message)
 
 		if message.channel.type == ChannelType.text:
-			if message.content == '!auth':
+			if message.content == 'auth':
 				self.auth_svc.start_session(message.author, message.guild.name)
 				await message.author.send('What is your shacknews username?')
 				logging.info(f'Starting auth session for {message.author}')
