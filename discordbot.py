@@ -11,8 +11,10 @@ token = os.environ['DISCORD_BOT_TOKEN']
 async def on_ready():
     print('------')
     print('起動しました。')
+    print('------')
     print('名前')
     print(client.user.name)
+    print('------')
     print('ID')
     print(client.user.id)
     print('------')
@@ -47,12 +49,12 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                 reaction_member.append(user.name)
                 cnt -= 1
                 test = discord.Embed(title=about,colour=0x1e90ff)
-                test.add_field(name=f"あと__{cnt}__人 募集中\n", value='\n'.join(reaction_member), inline=True)
+                test.add_field(name=f"あと__**{cnt}**__人 募集中\n", value='\n'.join(reaction_member), inline=True)
                 await msg.edit(embed=test)
 
                 if cnt == 0:
                     test = discord.Embed(title=about,colour=0x1e90ff)
-                    test.add_field(name=f"あと__{cnt}__人 募集中\n", value='\n'.join(reaction_member), inline=True)
+                    test.add_field(name=f"あと__**{cnt}**__人 募集中\n", value='\n'.join(reaction_member), inline=True)
                     await msg.edit(embed=test)
                     finish = discord.Embed(title=about,colour=0x1e90ff)
                     finish.add_field(name="おっと、メンバーが決まったようだな",value='\n'.join(reaction_member), inline=True)
@@ -63,7 +65,7 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     reaction_member.remove(user.name)
                     cnt += 1
                     test = discord.Embed(title=about,colour=0x1e90ff)
-                    test.add_field(name=f"あと__{cnt}__人 募集中\n", value='\n'.join(reaction_member), inline=True)
+                    test.add_field(name=f"あと__**{cnt}**__人 募集中\n", value='\n'.join(reaction_member), inline=True)
                     await msg.edit(embed=test)
                 else:
                     pass
@@ -72,6 +74,8 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
                     test = discord.Embed(title=about,color=0x1e90ff)
                     test.add_field(name=f"募集終了")
                     await msg.edit(embed=test)
+                else:
+                    pass
                     
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
         await msg.remove_reaction(str(reaction.emoji), user)
@@ -82,7 +86,9 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
-
+@client.command()
+async def menu(ctx):
+    await ctx.send('prefix:=\nhello **挨拶(?)します。**\nme **???(実行してみよう)**\nlol **???(実行してみよう)**\nrect <項目>　<人数> <時間(秒)> **募集を呼び掛けます(※開発中)**')    
 @client.command()
 async def hello(ctx):
     await ctx.send('こんばんは(　＾∀＾)')
