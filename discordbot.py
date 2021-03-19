@@ -100,7 +100,7 @@ async def baka(ctx):
 async def me(ctx):
     await ctx.send('君、誰だよ！')
                   
-@clientt.command()
+@client.command()
 async def lol(ctx):
     await ctx.send('**( ・∀・)**')
                 
