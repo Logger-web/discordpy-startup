@@ -88,7 +88,7 @@ async def on_command_error(ctx, error):
 async def menu(ctx):
     await ctx.send('prefix:=\nmenu **これです。**\nhello **挨拶(?)します。**\nme **???(実行してみよう)**\nlol **???(実行してみよう)**\nrect <項目>　<人数> <時間(秒)> **募集を呼び掛けます(※開発中)**') 
     
-@bot.command()
+@client.command()
 async def hello(ctx):
     await ctx.send('こんばんは(　＾∀＾)')
    
