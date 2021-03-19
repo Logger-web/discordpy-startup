@@ -94,7 +94,7 @@ async def hello(ctx):
    
 @client.command()
 async def baka(ctx):
-    await ctx.reply(f' `{name}`自己紹介ありがとうございます(^.^)(-.-)(__)')
+    await ctx.reply('自己紹介ありがとうございます(^.^)(-.-)(__)')
     
 @client.command()
 async def me(ctx):
