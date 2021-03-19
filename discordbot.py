@@ -4,10 +4,10 @@ import os
 import asyncio
 import traceback
 
-bot = commands.Bot(command_prefix='=')
+client = commands.Bot(command_prefix='=')
 token = os.environ['DISCORD_BOT_TOKEN']
 
-@bot.event
+@client.event
 async def on_ready():
     print('------')
     print('起動しました。')
@@ -19,7 +19,7 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-@bot.command()
+@client.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
     cnt, settime = int(cnt), float(settime)
     reaction_member = [">>>"]
@@ -78,13 +78,13 @@ async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
         # リアクション消す。メッセージ管理権限がないとForbidden:エラーが出ます。
         await msg.remove_reaction(str(reaction.emoji), user)
         
-@bot.event
+@client.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
-@bot.command()
+@client.command()
 async def menu(ctx):
     await ctx.send('prefix:=\nmenu **これです。**\nhello **挨拶(?)します。**\nme **???(実行してみよう)**\nlol **???(実行してみよう)**\nrect <項目>　<人数> <時間(秒)> **募集を呼び掛けます(※開発中)**') 
     
@@ -92,17 +92,17 @@ async def menu(ctx):
 async def hello(ctx):
     await ctx.send('こんばんは(　＾∀＾)')
    
-@bot.command()
+@client.command()
 async def baka(ctx):
-    await ctx.send('自己紹介ありがとうございます(^.^)(-.-)(__)')
+    await ctx.reply(f' `{name}`自己紹介ありがとうございます(^.^)(-.-)(__)')
     
-@bot.command()
+@client.command()
 async def me(ctx):
     await ctx.send('君、誰だよ！')
                   
-@bot.command()
+@clientt.command()
 async def lol(ctx):
     await ctx.send('**( ・∀・)**')
                 
                    
-bot.run(token)
+client.run(token)
