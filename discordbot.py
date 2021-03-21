@@ -38,7 +38,7 @@ async def transcript(ctx, limit =None):
     with open(path,mode="w",encoding="UTF-8") as f:
         f.write(log)
     await waiting.delete()
-    await ctx.send(f"This is {ctx.channel.mention}'s log.",file=discord.File(f"{ctx.channel.name}.txt") )
+    await ctx.send(f"{ctx.channel.mention}のチャット",file=discord.File(f"{ctx.channel.name}.txt") )
 
 
 @client.command()
