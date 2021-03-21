@@ -32,8 +32,8 @@ async def transcript(ctx, limit =None):
     log = f"#{ctx.channel.name}({ctx.channel.id}) logs\n"
     async for message in ctx.channel.history(limit=200):
         if message.author == client.user:
-        msg_count += 1
-        log += f"{message.author.name}({message.author.id}):{message.content}\n"
+            msg_count += 1
+            log += f"{message.author.name}({message.author.id}):{message.content}\n"
     path = f"{ctx.channel.name}.txt"
     with open(path,mode="w",encoding="UTF-8") as f:
         f.write(log)
