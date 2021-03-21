@@ -7,6 +7,8 @@ import traceback
 client = commands.Bot(command_prefix='=')
 token = os.environ['DISCORD_BOT_TOKEN']
 
+client = discord.Client()
+
 @client.event
 async def on_ready():
     print('------')
@@ -18,24 +20,26 @@ async def on_ready():
     print('ID')
     print(client.user.id)
     print('------')
-    
-@client.event
-async def on_reaction_add(reaction, user):
-    if reaction.emoji == '\N{CROSS MARK}':
-        await reaction.message.channel.send('削除したいメッセージの数を記入してください')
 
-        def check(m):
-            return m.content.isdecimal() and m.author == user
-        
-            msg = await client.wait_for("message", check=check)
-            num = int(msg.content) 
-           
-            await reaction.message.channel.send("[実行完了]削除しました")
-            await reaction.message.channel.purge(limit=num) 
+@bot.command()
+async def transcript(ctx, limit =None):
+    waiting = await ctx.send(f"{ctx.author.mention}->Recording chat log ...\nThis may take some time ...")
+    if not limit:
+        limit = None
+    else:
+        limit = int(limit)
+    msg_count = 0
+    log = f"#{ctx.channel.name}({ctx.channel.id}) logs\n"
+    async for message in ctx.channel.history(limit=200):
+        if message.author == client.user:
+        msg_count += 1
+        log += f"{message.author.name}({message.author.id}):{message.content}\n"
+    path = f"{ctx.channel.name}.txt"
+    with open(path,mode="w",encoding="UTF-8") as f:
+        f.write(log)
+    await waiting.delete()
+    await ctx.send(f"This is {ctx.channel.mention}'s log.",file=discord.File(f"{ctx.channel.name}.txt") )
 
-        def check(m):
-            return m.author == user and m.content=="all"
-            await reaction.message.channel.send("[実行完了]メッセージを全部、削除しました")  
 
 @client.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
