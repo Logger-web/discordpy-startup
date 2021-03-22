@@ -20,26 +20,11 @@ async def on_ready():
     print('ID')
     print(client.user.id)
     print('------')
-
-@bot.command()
-async def transcript(ctx, limit =None):
-    waiting = await ctx.send(f"{ctx.author.mention}->Recording chat log ...\nThis may take some time ...")
-    if not limit:
-        limit = None
-    else:
-        limit = int(limit)
-    msg_count = 0
-    log = f"#{ctx.channel.name}({ctx.channel.id}) logs\n"
-    async for message in ctx.channel.history(limit=200):
-        if message.author == client.user:
-            msg_count += 1
-            log += f"{message.author.name}({message.author.id}):{message.content}\n"
-    path = f"{ctx.channel.name}.txt"
-    with open(path,mode="w",encoding="UTF-8") as f:
-        f.write(log)
-    await waiting.delete()
-    await ctx.send(f"{ctx.channel.mention} chatlog",file=discord.File(f"{ctx.channel.name}.txt") )
-
+@client.command()
+async def ping(ctx):
+  a = bot.ping * 800
+  b = round(a)
+  await ctx.reply(f"Pong! {b} ms")
 
 @client.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
