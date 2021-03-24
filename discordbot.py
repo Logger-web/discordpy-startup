@@ -20,6 +20,7 @@ async def on_ready():
     print('ID')
     print(client.user.id)
     print('------')
+    
 @client.command()
 async def ping(ctx):
   a = bot.ping * 800
