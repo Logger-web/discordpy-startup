@@ -13,10 +13,10 @@ async def on_ready():
     print('起動しました。')
     print('------')
     print('名前')
-    print(client.user.name)
+    print(bot.user.name)
     print('------')
     print('ID')
-    print(client.user.id)
+    print(bot.user.id)
     print('------')
     await client.change_presence(activity=discord.Game(name="正常に稼働しています。"))
     
