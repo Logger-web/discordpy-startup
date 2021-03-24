@@ -18,7 +18,7 @@ async def on_ready():
     print('ID')
     print(bot.user.id)
     print('------')
-    await client.change_presence(activity=discord.Game(name="正常に稼働しています。"))
+    await bot.change_presence(activity=discord.Game(name="正常に稼働しています。"))
     
 @bot.command()
 async def ping(ctx):
