@@ -110,6 +110,15 @@ async def me(ctx):
 @bot.command()
 async def lol(ctx):
     await ctx.send('**( ・∀・)**')
+    
+@bot.command()
+@commands.is_owner()
+async def die(ctx):
+    game = discord.Game("")
+    await bot.change_presence(status=discord.Status.offline, activity=game)
+    bot.active = False
+    await ctx.bot.logout() 
+
                 
                    
 bot.run(token)
