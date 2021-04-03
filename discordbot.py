@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 import asyncio
 import traceback
+import logging
 
 bot = commands.Bot(command_prefix='=')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -20,11 +21,10 @@ async def on_ready():
     print('------')
     await bot.change_presence(activity=discord.Game(name="正常に稼働しています。"))
     
-@bot.command()
-async def ping(ctx):
-  a = bot.ping * 800
-  b = round(a)
-  await ctx.reply(f"Pong! {b} ms")
+@bot.event
+async def on_member_join(member):
+    await message.channel.send(f"{message.author.display_name}さん、||ピザは持ってきたかね?||\nようこそ\n楽しんでいってね\n勿論ですが、ピザのは冗談です")
+    
 
 @bot.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
@@ -114,7 +114,7 @@ async def lol(ctx):
 @bot.command()
 @commands.is_owner()
 async def offline(ctx):
-    await bot.change_presence(status=discord.Status.OFFLINE, activity=game)
+    await bot.change_presence(status=discord.Status.offline, activity=game)
     await ctx.reply('ステータスを[OFFLINE]に変更しました。')
                 
                    
