@@ -28,20 +28,20 @@ async def on_voice_channel_move(member, before, after):
                                                                                 
 @bot.event
 async def on_voice_self_mute_enable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} ミュート(自分自身でミュート)")
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がミュートになりました。")
 
  
 @bot.event
 async def on_voice_self_mute_disable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} ミュート解除")
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がミュートを解除しました。")
 
 @bot.event
 async def on_voice_self_deaf_enable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} enabled self-deaf.")
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がスピーカーミュートになりました。")
 
 @bot.event
 async def on_voice_self_deaf_disable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} disabled self-deaf.")
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がスピーカーミュートを解除しました。")
 
 
 @bot.event
