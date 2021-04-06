@@ -9,6 +9,42 @@ bot = commands.Bot(command_prefix='=')
 token = os.environ['DISCORD_BOT_TOKEN']
 
 @bot.event
+    async def on_ready():
+        print(f"Logged in as {bot.user}.")
+
+ 
+@bot.event
+async def on_voice_channel_join(member, channel):
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} が {channel.name}　に接続しました。")
+
+
+@bot.event
+async def on_voice_channel_leave(member, channel):
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} が {channel.name}　から切断しました。")
+
+@bot.event
+async def on_voice_channel_move(member, before, after):
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} が {after.name} から　{before.name}　に移動しました。"
+                                                                                
+@bot.event
+async def on_voice_self_mute_enable(member):
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} ミュート(自分自身でミュート)")
+
+ 
+@bot.event
+async def on_voice_self_mute_disable(member):
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} ミュート解除")
+
+@bot.event
+async def on_voice_self_deaf_enable(member):
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} enabled self-deaf.")
+
+@bot.event
+async def on_voice_self_deaf_disable(member):
+    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} disabled self-deaf.")
+
+
+@bot.event
 async def on_ready():
     print('------')
     print('起動しました。')
