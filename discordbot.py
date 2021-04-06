@@ -9,9 +9,17 @@ bot = commands.Bot(command_prefix='=')
 token = os.environ['DISCORD_BOT_TOKEN']
 
 @bot.event
-    async def on_ready():
-        print(f"Logged in as {bot.user}.")
-
+async def on_ready():
+    print('------')
+    print('起動しました。')
+    print('------')
+    print('名前')
+    print(bot.user.name)
+    print('------')
+    print('ID')
+    print(bot.user.id)
+    print('------')
+    await bot.change_presence(activity=discord.Game(name="開発中( ﾟ∀ﾟ)"))
  
 @bot.event
 async def on_voice_channel_join(member, channel):
@@ -42,24 +50,12 @@ async def on_voice_self_deaf_enable(member):
 @bot.event
 async def on_voice_self_deaf_disable(member):
     await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がスピーカーミュートを解除しました。")
-
-
-@bot.event
-async def on_ready():
-    print('------')
-    print('起動しました。')
-    print('------')
-    print('名前')
-    print(bot.user.name)
-    print('------')
-    print('ID')
-    print(bot.user.id)
-    print('------')
-    await bot.change_presence(activity=discord.Game(name="正常に稼働しています。"))
     
 @bot.event
 async def on_member_join(member):
     await message.channel.send(f"{message.author.display_name}さん、||ピザは持ってきたかね?||\nようこそ\n楽しんでいってね\n勿論ですが、ピザのは冗談です")
+                                                                            
+                       
     
 
 @bot.command()
