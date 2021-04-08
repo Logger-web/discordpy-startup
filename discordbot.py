@@ -122,7 +122,7 @@ async def lol(ctx):
 @bot.command()
 @commands.is_owner()
 async def offline(ctx):
-    await bot.change_presence(status=discord.Status.idle,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
+    await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply('ステータスを[OFFLINE]に変更しました。')
     await bot.logout()
                 
