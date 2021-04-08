@@ -34,9 +34,6 @@ async def on_voice_channel_leave(member, channel):
 async def on_voice_channel_move(member, before, after):
     await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} が {after.name} から　{before.name}　に移動しました。"
                                                                                 
-@bot.event
-async def on_voice_self_mute_enable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がミュートになりました。")
 
  
 @bot.event
@@ -146,7 +143,7 @@ async def lol(ctx):
 @bot.command()
 @commands.is_owner()
 async def offline(ctx):
-    await bot.change_presence(status=discord.Status.online,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
+    await bot.change_presence(status=discord.Status.idle,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply('ステータスを[OFFLINE]に変更しました。')
     await bot.logout()
                 
