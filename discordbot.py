@@ -33,21 +33,7 @@ async def on_voice_channel_leave(member, channel):
 @bot.event
 async def on_voice_channel_move(member, before, after):
     await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} が {after.name} から　{before.name}　に移動しました。"
-                                                                                
-
- 
-@bot.event
-async def on_voice_self_mute_disable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がミュートを解除しました。")
-
-@bot.event
-async def on_voice_self_deaf_enable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がスピーカーミュートになりました。")
-
-@bot.event
-async def on_voice_self_deaf_disable(member):
-    await discord.utils.get(member.guild.text_channels, name="vc-log").send(f"{member.mention} がスピーカーミュートを解除しました。")
-    
+                                                 
 @bot.event
 async def on_member_join(member):
     await message.channel.send(f"{message.author.display_name}さん、||ピザは持ってきたかね?||\nようこそ\n楽しんでいってね\n勿論ですが、ピザのは冗談です")
