@@ -1,3 +1,4 @@
+import config
 import discord
 import time
 from discord.ext import commands, task
@@ -170,6 +171,5 @@ async def offline(ctx):
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply("実行完了")
 
-   
-bot = commands.Bot(command_prefix                 
+
 bot.run(token)
