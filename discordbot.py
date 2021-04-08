@@ -7,7 +7,7 @@ import logging
 
 bot = commands.Bot(command_prefix='?.', help_command=JapaneseHelpCommand())
 token = os.environ['DISCORD_BOT_TOKEN']
-prefix = ?.
+prefix = '?.'
 bot.add_cog(Main(bot=bot))
 
 class Main(commands.Cog, name='メインコマンド'):
