@@ -5,9 +5,28 @@ import asyncio
 import traceback
 import logging
 
-bot = commands.Bot(command_prefix='=')
+bot = commands.Bot(command_prefix='?.', help_command=JapaneseHelpCommand())
 token = os.environ['DISCORD_BOT_TOKEN']
+prefix = ?.
+bot.add_cog(Main(bot=bot))
 
+class Main(commands.Cog, name='メインコマンド'):
+    def __init__(self, bot):
+        super().__init__()
+        self.bot = bot
+
+
+class JapaneseHelpCommand(commands.DefaultHelpCommand):
+    def __init__(self):
+        super().__init__()
+        self.commands_heading = "コマンド:"
+        self.no_category = "その他"
+        self.command_attrs["help"] = "コマンド一覧と簡単な説明を表示"
+        
+    def get_ending_note(self):
+        return (f"各コマンドの説明: {prefix}help <コマンド名>\n"
+                f"各カテゴリの説明: {prefix}help <カテゴリ名>\n")
+        
 @bot.event
 async def on_ready():
     print('------')
@@ -49,6 +68,7 @@ async def on_voice_channel_move(member, before, after):
                                                                            
 @bot.command()
 async def rect(ctx, about = "募集", cnt = 4, settime = 10.0):
+    """募集を呼び掛ける"""
     cnt, settime = int(cnt), float(settime)
     reaction_member = [">>>"]
     test = discord.Embed(title=about,colour=0x1e90ff)
@@ -111,30 +131,31 @@ async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
-
-@bot.command()
-async def menu(ctx):
-    await ctx.send('prefix:=\nmenu **これです。**\nhello **挨拶(?)します。**\nme **???(実行してみよう)**\nlol **???(実行してみよう)**\nrect <項目>　<人数> <時間(秒)> **募集を呼び掛けます(※開発中)**') 
-    
+   
 @bot.command()
 async def hello(ctx):
+    """挨拶をする"""
     await ctx.send('こんばんは(　＾∀＾)')
    
 @bot.command()
 async def baka(ctx):
+    """**実行してみよう**"""
     await ctx.reply('自己紹介ありがとうございます(^.^)(-.-)(__)')
     
 @bot.command()
 async def me(ctx):
+    """**あなたが誰かを当てる笑！**"""
     await ctx.send('君、誰だよ！')
                   
 @bot.command()
 async def lol(ctx):
+    """顔文字"""
     await ctx.send('**( ・∀・)**')
     
 @bot.command()
 @commands.is_owner()
 async def offline(ctx):
+    """**__ボットのオーナー専用__**"""
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply('ステータスを[OFFLINE]に変更しました。')
     await bot.logout()
