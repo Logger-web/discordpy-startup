@@ -21,7 +21,32 @@ async def on_ready():
     print('ID')
     print(bot.user.id)
     print('------')
-    await bot.change_presence(activity=discord.Game(name="開発中(エラー起きてるんゴーw)"))
+    await bot.change_presence(activity=discord.Game(name="ボットを起動しています....."))
+    
+def get_status():
+    try:
+        pt = time.time()
+        with mcipc.query.Client(config.host, config.port) as mcbe:
+            status = mcbe.stats(full=True)
+            ping = (time.time()-pt)*1000
+        del mcbe
+        return status, ping
+    except:
+        return None
+    
+
+
+@tasks.loop(seconds=30)
+async def server_status_updater():
+    await bot.wait_until_ready()
+    loop = asyncio.get_event_loop()
+    data = await loop.run_in_executor(None, get_status)
+    if not data:
+        return await bot.change_presence(
+            status=discord.Status.dnd, activity=discord.Game('サーバーがオフラインです'))
+    st = f'{data[0].num_players} / {data[0].max_players} | ping: {data[1]:.1f}ms'
+    await bot.change_presence(
+        status=discord.Status.online, activity=discord.Game(st))
     
 @bot.event
 async def on_command_error(ctx, error):
