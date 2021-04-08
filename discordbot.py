@@ -19,7 +19,7 @@ async def on_ready():
     print('ID')
     print(bot.user.id)
     print('------')
-    await bot.change_presence(activity=discord.Game(name="開発中( ﾟ∀ﾟ)"))
+    await bot.change_presence(activity=discord.Game(name="開発中(エラー起きてるんゴーw)"))
  
 @bot.event
 async def on_voice_channel_join(member, channel):
@@ -146,8 +146,9 @@ async def lol(ctx):
 @bot.command()
 @commands.is_owner()
 async def offline(ctx):
-    await bot.change_presence(status=discord.Status.offline, activity=game)
+    await bot.change_presence(status=discord.Status.online,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply('ステータスを[OFFLINE]に変更しました。')
+    await bot.logout()
                 
                    
 bot.run(token)
