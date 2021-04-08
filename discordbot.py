@@ -5,10 +5,8 @@ import asyncio
 import traceback
 import logging
 
-bot = commands.Bot(command_prefix='?.', help_command=JapaneseHelpCommand())
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
-bot.add_cog(Main(bot=bot))
 
 class Main(commands.Cog, name='メインコマンド'):
     def __init__(self, bot):
@@ -159,6 +157,7 @@ async def offline(ctx):
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply('ステータスを[OFFLINE]に変更しました。')
     await bot.logout()
-                
-                   
+   
+bot = commands.Bot(command_prefix='?.', help_command=JapaneseHelpCommand()) 
+bot.add_cog(Main(bot=bot))                   
 bot.run(token)
