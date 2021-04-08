@@ -12,18 +12,6 @@ class Main(commands.Cog, name='メインコマンド'):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
-
-
-class JapaneseHelpCommand(commands.DefaultHelpCommand):
-    def __init__(self):
-        super().__init__()
-        self.commands_heading = "コマンド:"
-        self.no_category = "その他"
-        self.command_attrs["help"] = "コマンド一覧と簡単な説明を表示"
-        
-    def get_ending_note(self):
-        return (f"各コマンドの説明: {prefix}help <コマンド名>\n"
-                f"各カテゴリの説明: {prefix}help <カテゴリ名>\n")
         
 @bot.event
 async def on_ready():
@@ -157,6 +145,18 @@ async def offline(ctx):
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply('ステータスを[OFFLINE]に変更しました。')
     await bot.logout()
+    
+class JapaneseHelpCommand(commands.DefaultHelpCommand):
+    def __init__(self):
+        super().__init__()
+        self.commands_heading = "コマンド:"
+        self.no_category = "その他"
+        self.command_attrs["help"] = "コマンド一覧と簡単な説明を表示"
+        
+    def get_ending_note(self):
+        return (f"各コマンドの説明: {prefix}help <コマンド名>\n"
+                f"各カテゴリの説明: {prefix}help <カテゴリ名>\n")
+
    
 bot = commands.Bot(command_prefix='?.', help_command=JapaneseHelpCommand()) 
 bot.add_cog(Main(bot=bot))                   
