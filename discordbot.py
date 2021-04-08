@@ -5,14 +5,11 @@ import asyncio
 import traceback
 import logging
 
+bot = commands.bot(command_prefix = '?.')
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
 
-class Main(commands.Cog, name='メインコマンド'):
-    def __init__(self, bot):
-        super().__init__()
-        self.bot = bot
-        
+
 @bot.event
 async def on_ready():
     print('------')
@@ -143,21 +140,8 @@ async def lol(ctx):
 async def offline(ctx):
     """**__ボットのオーナー専用__**"""
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
-    await ctx.reply('ステータスを[OFFLINE]に変更しました。')
-    await bot.logout()
-    
-class JapaneseHelpCommand(commands.DefaultHelpCommand):
-    def __init__(self):
-        super().__init__()
-        self.commands_heading = "コマンド:"
-        self.no_category = "その他"
-        self.command_attrs["help"] = "コマンド一覧と簡単な説明を表示"
-        
-    def get_ending_note(self):
-        return (f"各コマンドの説明: {prefix}help <コマンド名>\n"
-                f"各カテゴリの説明: {prefix}help <カテゴリ名>\n")
+    await ctx.reply("実行完了")
 
    
-bot = commands.Bot(command_prefix='?.', help_command=JapaneseHelpCommand()) 
-bot.add_cog(Main(bot=bot))                   
+bot = commands.Bot(command_prefix                 
 bot.run(token)
