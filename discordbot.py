@@ -8,7 +8,7 @@ import logging
 bot = commands.Bot(command_prefix="s.")
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
-startch_name = "S.起動通知"
+startch_name = "bot-起動通知"
 
 
 @bot.event
@@ -41,6 +41,12 @@ async def on_command_error(ctx, error):
     embed.add_field(name="発生エラー", value=error, inline=False)
     m = await bot.get_channel(ch).send(embed=embed)
     await ctx.send(f"エラーが発生しました。\nこのエラーについて問い合わせるときはこのコードも一緒にお知らせください\nID：{m.id}")
+    
+@bot.command()
+@command.is_owner()
+async def start(ctx):
+    await bot.change_presence(activity=discord.Game(name="開発中(Pythonわからないんゴーw)"))
+    await ctx.send('成功したよ')
  
 @bot.event
 async def on_voice_channel_join(member, channel):
