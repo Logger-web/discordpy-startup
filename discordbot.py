@@ -5,7 +5,7 @@ import asyncio
 import traceback
 import logging
 
-bot = commands.bot(command_prefix = '?.')
+bot = commands.bot(command_prefix="?.")
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
 
@@ -142,5 +142,4 @@ async def offline(ctx):
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply("実行完了")
 
-server_status_updater.start()
 bot.run(token)
