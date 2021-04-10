@@ -5,7 +5,7 @@ import asyncio
 import traceback
 import logging
 
-bot = commands.Bot(command_prefix=".")
+bot = commands.Bot(command_prefix="s.")
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
 
@@ -122,12 +122,12 @@ async def hello(ctx):
    
 @bot.command()
 async def baka(ctx):
-    """**実行してみよう**"""
+    """実行してみよう"""
     await ctx.reply('自己紹介ありがとうございます(^.^)(-.-)(__)')
     
 @bot.command()
 async def me(ctx):
-    """**あなたが誰かを当てる笑！**"""
+    """あなたが誰かを当てる笑！"""
     await ctx.send('君、誰だよ！')
                   
 @bot.command()
@@ -138,7 +138,7 @@ async def lol(ctx):
 @bot.command()
 @commands.is_owner()
 async def offline(ctx):
-    """**__ボットのオーナー専用__**"""
+    """ボットのオーナー専用"""
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply("実行完了")
 
