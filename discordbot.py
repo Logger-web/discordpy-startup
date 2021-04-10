@@ -8,6 +8,7 @@ import logging
 bot = commands.Bot(command_prefix="s.")
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
+startch_name = "S.起動通知"
 
 
 @bot.event
@@ -22,7 +23,12 @@ async def on_ready():
     print(bot.user.id)
     print('------')
     await bot.change_presence(activity=discord.Game(name="ボットを起動しています....."))
-    
+    for channel in bot.get_all_channels():
+        if channel.name == startch_name:
+            await channel.send("起動しました")
+
+start = 830361538417262602
+
 @bot.event
 async def on_command_error(ctx, error):
     ch = 829611061284044830
