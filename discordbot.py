@@ -43,7 +43,7 @@ async def on_command_error(ctx, error):
     await ctx.send(f"エラーが発生しました。\nこのエラーについて問い合わせるときはこのコードも一緒にお知らせください\nID：{m.id}")
     
 @bot.command()
-@command.is_owner()
+@commands.is_owner()
 async def start(ctx):
     await bot.change_presence(activity=discord.Game(name="開発中(Pythonわからないんゴーw)"))
     await ctx.send('成功したよ')
