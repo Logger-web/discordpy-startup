@@ -1,11 +1,11 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 import os
 import asyncio
 import traceback
 import logging
 
-bot = commands.bot(command_prefix="?.")
+bot = commands.bot(command_prefix=".")
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
 
