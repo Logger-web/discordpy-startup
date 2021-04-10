@@ -5,7 +5,7 @@ import asyncio
 import traceback
 import logging
 
-bot = commands.bot(command_prefix=".")
+bot = commands.Bot(command_prefix=".")
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
 
