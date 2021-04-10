@@ -1,6 +1,4 @@
-import config
 import discord
-import time
 from discord.ext import commands, tasks
 import os
 import asyncio
