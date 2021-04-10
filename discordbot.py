@@ -7,8 +7,6 @@ import asyncio
 import traceback
 import logging
 
-import mcipc.query
-
 bot = commands.bot(command_prefix = '?.')
 token = os.environ['DISCORD_BOT_TOKEN']
 prefix = '?.'
