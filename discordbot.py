@@ -37,7 +37,7 @@ async def say(ctx):
 
 @tasks.loop(seconds=10)
 async def edit():
-   editmsg = await fetch_message(840513387430674442)
+   editmsg = await ctx.fetch_message(840513387430674442)
    testembed =discord.Embed(title='TestEmbed', description='Yes.Done!')
    await editmsg.edit(embed=testembed)
 
