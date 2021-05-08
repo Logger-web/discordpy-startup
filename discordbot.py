@@ -28,7 +28,7 @@ async def on_ready():
             await channel.send("起動しました")
             
 
-@client.command() 
+@bot.command() 
 async def edit(ctx): 
    message = await ctx.send('テスト') 
    await asyncio.sleep(0.3) 
