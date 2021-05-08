@@ -39,7 +39,7 @@ async def say(ctx):
 async def edit():
    editmsg = await fetch_message(840513387430674442)
    testembed =discord.Embed(title='TestEmbed', description='Yes.Done!')   
-   await editmsg.edit(embed=testembed) 
+   await editmsg.edit(content='testembed') 
 
   
 @bot.event
