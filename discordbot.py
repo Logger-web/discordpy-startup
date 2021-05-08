@@ -11,22 +11,7 @@ prefix = '?.'
 startch_name = "bot-起動通知"
 
 
-@bot.event
-async def on_ready():
-    print('------')
-    print('起動しました。')
-    print('------')
-    print('名前')
-    print(bot.user.name)
-    print('------')
-    print('ID')
-    print(bot.user.id)
-    print('------')
-    await bot.change_presence(activity=discord.Game(name="ボットを起動しています....."))
-    for channel in bot.get_all_channels():
-        if channel.name == startch_name:
-            await channel.send("起動しました")
-            
+
 
 @bot.command() 
 async def edit(ctx): 
@@ -36,9 +21,64 @@ async def edit(ctx):
             
 start = 830361538417262602
 
+
+
+
+
+onlineembed = discord.Embed(title='online', description='ihiw')
+
+
+
+
+@bot.command()
+async def say(ctx):
+       await ctx.send('Done!')
+
+
+@tasks.loop(seconds=10)
+async def edit():
+       editmsg = await fetch_message(840513387430674442)
+       await editmsg.edit(embed=onlineembed) 
+
+  
+@bot.event
+async def on_message(message):
+
+    if message.author.bot:
+        return
+
+    if bot.user in message.mentions:
+        now = datetime.datetime.now()
+        date_and_time = now.strftime('%m月%d日 %H:%M')
+        url = 'https://api.mcsrvstat.us/2/play.elementx.jp:19132'
+        response = requests.get(url)
+        jsonData = response.json()
+
+        if jsonData["online"]==False:
+            embed = discord.Embed(title="ElementX Network Status", description='サーバーはオフラインです。\nサーバーがクラッシュ、dos攻撃を受けて落ちている可能性があります。\n\n[ウェブサイト](http://elementx.jp)\n[BOTを招待する](https://discord.com/api/oauth2/authorize?client_id=838237415193575424&permissions=2147870784&scope=bot)\nボットが機能してない場合は、バグか権限がない場合があります。\nアイコン作成:うぃんぐさん\n[うぃんぐさんのツイッター](https://twitter.com/wing_12345?s=09)', color=0xff0000)
+            await message.channel.send(embed=embed)
+            return None
+        plyrs=""
+        
+        try:
+            for i in jsonData["players"]["list"]:
+                plyrs=plyrs+i+"\n"
+        except KeyError:
+            plyrs="プレイヤーはいません。\n" 
+            
+        embed = discord.Embed(title="ElementX Network Status", description="サーバーがオンラインです。", color=0x00ff00, url="http://elementx.jp")
+        embed.set_author(name="", url="", icon_url="https://cdn.discordapp.com/attachments/781833347722641480/838303560135475220/16199375169594898528928078599679.png")
+        embed.add_field(name="IP:PORT", value=jsonData['hostname']+":"+str(jsonData['port']))
+        embed.add_field(name="人数", value=str(jsonData['players']['online'])+"/"+str(jsonData["players"]["max"]))
+        embed.add_field(name="接続しているプレイヤー", value=plyrs, inline=True)
+        await message.channel.send(embed=embed)
+        return None
+
+
+
 @bot.event
 async def on_command_error(ctx, error):
-    ch = 829611061284044830
+    ch = 838626462440751114
     embed = discord.Embed(title="エラー情報", description="", color=0xf00)
     embed.add_field(name="エラー発生サーバー名", value=ctx.guild.name, inline=False)
     embed.add_field(name="エラー発生サーバーID", value=ctx.guild.id, inline=False)
@@ -47,8 +87,11 @@ async def on_command_error(ctx, error):
     embed.add_field(name="エラー発生コマンド", value=ctx.message.content, inline=False)
     embed.add_field(name="発生エラー", value=error, inline=False)
     m = await bot.get_channel(ch).send(embed=embed)
-    await ctx.send(f"エラーが発生しました。\nこのエラーについて問い合わせるときはこのコードも一緒にお知らせください\nID：{m.id}")
+    await ctx.send(f"エラーが発生しました。\nこのエラーについて問い合わせるときはこのコードも一緒にお知らせください\nID：{m.id}", color=0x00ff00)
     
+
+
+                
 @bot.command()
 @commands.is_owner()
 async def start(ctx):
@@ -160,5 +203,23 @@ async def offline(ctx):
     """ボットのオーナー専用"""
     await bot.change_presence(status=discord.Status.offline,activity=discord.Game('開発中(エラー起きてるんゴーw)'))
     await ctx.reply("実行完了")
-
+    
+    
+@bot.event
+async def on_ready():
+    print('------')
+    print('起動しました。')
+    print('------')
+    print('名前')
+    print(bot.user.name)
+    print('------')
+    print('ID')
+    print(bot.user.id)
+    print('------')
+    await bot.change_presence(activity=discord.Game(name="ボットを起動しています....."))
+    for channel in bot.get_all_channels():
+        if channel.name == startch_name:
+            await channel.send("起動しました")
+            
+edit.start()
 bot.run(token)
