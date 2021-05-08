@@ -26,7 +26,14 @@ async def on_ready():
     for channel in bot.get_all_channels():
         if channel.name == startch_name:
             await channel.send("起動しました")
+            
 
+@client.command() 
+async def edit(ctx): 
+   message = await ctx.send('テスト') 
+   await asyncio.sleep(0.3) 
+   await message.edit(content='テスト済み')
+            
 start = 830361538417262602
 
 @bot.event
